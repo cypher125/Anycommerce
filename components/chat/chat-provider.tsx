@@ -57,7 +57,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         messages: [
           {
             id: "welcome",
-            content: "Hi there! I'm your AI shopping assistant. How can I help you today?",
+            content: "Hi there! I'm Cartana, your AI shopping assistant. How can I help you today?",
             role: "assistant",
             timestamp: new Date(),
           },
