@@ -181,7 +181,7 @@ export default function ProductDetail() {
                   >
                       <Heart className="w-5 h-5 mr-2" />
                       Wishlist
-                    </motion.button>
+                  </motion.button>
                   </div>
                 </div>
               </motion.div>

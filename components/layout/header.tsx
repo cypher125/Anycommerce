@@ -125,41 +125,41 @@ export function Header() {
 
             {/* Cart Button */}
             <div className="relative">
-              <motion.button
+            <motion.button
                 className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors mx-1 sm:mx-4"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                aria-label="Cart"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              aria-label="Cart"
                 onClick={() => setCartOpen(!cartOpen)}
-              >
+            >
                 <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#28809a] rounded-full text-xs flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
-              </motion.button>
+            </motion.button>
               
               <CartDropdown />
             </div>
 
             {/* User Button */}
             <div className="relative hidden sm:block">
-              <motion.button
+            <motion.button
                 className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                aria-label="User Account"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              aria-label="User Account"
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              >
+            >
                 <User className="w-4 h-4 sm:w-5 sm:h-5" />
-              </motion.button>
+            </motion.button>
 
               {/* Profile Dropdown Menu */}
               <AnimatePresence>

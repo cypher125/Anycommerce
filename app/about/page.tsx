@@ -143,6 +143,117 @@ export default function About() {
               </p>
             </motion.div>
 
+            {/* Cortana Capabilities Section */}
+            <motion.div
+              className="mb-20 bg-[#2A2A2A] rounded-xl p-8 border border-[#8D9192]/10"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+            >
+              <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4 flex items-center">
+                <span className="inline-flex mr-3 w-8 h-8 rounded-full bg-[#28809a]/20 items-center justify-center">
+                  <span className="w-4 h-4 rounded-full bg-[#28809a] animate-pulse"></span>
+                </span>
+                What Cortana Can Do For You
+              </h2>
+              
+              <p className="text-[#EDEDED] mb-6">
+                Our AI shopping assistant Cortana is designed to make your shopping experience effortless and enjoyable. Here's how Cortana can help you:
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <TiltCard className="bg-[#28809a]/5 rounded-xl overflow-hidden border border-[#28809a]/20 p-6">
+                  <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">Product Discovery</h3>
+                  <ul className="space-y-2 text-[#EDEDED]">
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Find black sneakers under $70 in size 42"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Show me lightweight waterproof running shoes"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Find products similar to this" (with image upload)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Compare these two laptops for me"</span>
+                    </li>
+                  </ul>
+                </TiltCard>
+                
+                <TiltCard className="bg-[#28809a]/5 rounded-xl overflow-hidden border border-[#28809a]/20 p-6">
+                  <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">Shopping Assistance</h3>
+                  <ul className="space-y-2 text-[#EDEDED]">
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Add this to my cart"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Remove the red shirt from my cart"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"What's in my cart?"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Calculate my total with shipping"</span>
+                    </li>
+                  </ul>
+                </TiltCard>
+                
+                <TiltCard className="bg-[#28809a]/5 rounded-xl overflow-hidden border border-[#28809a]/20 p-6">
+                  <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">Order Management</h3>
+                  <ul className="space-y-2 text-[#EDEDED]">
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Track my order from last week"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Reorder my last pack of Nescafe"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Cancel my recent order"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Show me my order history"</span>
+                    </li>
+                  </ul>
+                </TiltCard>
+                
+                <TiltCard className="bg-[#28809a]/5 rounded-xl overflow-hidden border border-[#28809a]/20 p-6">
+                  <h3 className="text-xl font-bold text-[#FFFFFF] mb-3">Personalization</h3>
+                  <ul className="space-y-2 text-[#EDEDED]">
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Set a price alert for this TV when under $500"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Show me products I might like"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#28809a] mr-2">•</span>
+                      <span>"Are there any discount codes available for me?"</span>
+                    </li>
+                  </ul>
+                </TiltCard>
+              </div>
+              
+              <div className="bg-[#28809a]/10 rounded-lg p-4 border border-[#28809a]/20">
+                <p className="text-[#EDEDED] text-center italic">
+                  Simply type, speak, or upload an image—Cortana understands and takes action immediately.
+                </p>
+              </div>
+            </motion.div>
+
             {/* Team Section */}
             <motion.div
               className="mb-16"
