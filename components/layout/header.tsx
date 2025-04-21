@@ -13,6 +13,8 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
   const pathname = usePathname()
   const router = useRouter()
   const { user, logout } = useAuth()
@@ -46,6 +48,15 @@ export function Header() {
       router.push("/auth/login")
     } catch (error) {
       console.error("Logout failed:", error)
+    }
+  }
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      setIsSearchOpen(false)
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+      setSearchQuery("")
     }
   }
 
@@ -107,6 +118,7 @@ export function Header() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               aria-label="Search"
+              onClick={() => setIsSearchOpen(true)}
             >
               <Search className="w-5 h-5" />
             </motion.button>
@@ -233,6 +245,69 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            className="fixed inset-0 bg-[#252525]/95 z-50 flex items-start justify-center p-4 pt-16 sm:pt-24 sm:items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsSearchOpen(false)}
+          >
+            <motion.div
+              className="bg-[#2A2A2A] rounded-xl border border-[#8D9192]/20 shadow-lg p-6 w-full max-w-xl mx-auto"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-medium text-[#EDEDED]">Search Products</h2>
+                <button 
+                  onClick={() => setIsSearchOpen(false)}
+                  className="text-[#8D9192] hover:text-[#EDEDED] transition-colors p-1"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <form onSubmit={handleSearch} className="relative">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8D9192]" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search for products..."
+                    className="w-full p-3 pl-10 bg-[#252525] border border-[#8D9192]/30 rounded-md text-[#EDEDED] focus:border-[#28809a] focus:ring-1 focus:ring-[#28809a]/30 focus:outline-none transition-colors"
+                    autoFocus
+                  />
+                </div>
+                
+                <div className="mt-6 flex justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsSearchOpen(false)}
+                    className="px-4 py-2 text-[#8D9192] hover:text-[#EDEDED] hover:bg-[#353535] rounded-md transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#28809a] hover:bg-[#28809a]/80 text-white rounded-md transition-colors"
+                  >
+                    Search
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Menu */}
       <AnimatePresence>
