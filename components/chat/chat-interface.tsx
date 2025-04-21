@@ -14,6 +14,7 @@ export function ChatInterface() {
   const { isOpen, messages, isTyping, toggleChat, sendMessage, clearMessages } = useChat()
   const [inputValue, setInputValue] = useState("")
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -26,6 +27,20 @@ export function ChatInterface() {
     "What's on sale?",
     "Compare products",
   ]
+
+  // Check if mobile on mount
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -84,10 +99,10 @@ export function ChatInterface() {
             className={`fixed z-[999] border border-[#8D9192]/20 ${
               isExpanded
                 ? "top-[10vh] right-[10vw] left-[10vw] bottom-[10vh] w-auto h-auto"
-                : "top-[50%] right-6 w-full sm:w-96 h-[400px] -translate-y-1/2"
+                : "top-auto bottom-2 right-2 left-2 sm:top-[50%] sm:right-6 sm:left-auto sm:bottom-auto sm:w-full sm:w-96 h-[400px] sm:-translate-y-1/2"
             } bg-[#252525] rounded-lg shadow-xl flex flex-col overflow-hidden`}
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: isExpanded ? 0 : "-50%", scale: 1 }}
+            animate={{ opacity: 1, y: isExpanded ? 0 : isMobile ? 0 : "-50%", scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             layout

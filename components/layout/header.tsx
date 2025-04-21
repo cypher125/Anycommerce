@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, ShoppingCart, Search, User, LogOut } from "lucide-react"
+import { Menu, X, ShoppingCart, Search, User, LogOut, Package } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
 import { useCart } from "@/components/cart-provider"
 import { CartDropdown } from "@/components/layout/cart-dropdown"
@@ -63,15 +63,15 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#252525]/90 backdrop-blur-md shadow-md py-3" : "bg-transparent py-5"
+        isScrolled ? "bg-[#252525]/90 backdrop-blur-md shadow-md py-2 sm:py-3" : "bg-transparent py-3 sm:py-5"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center z-10">
             <motion.div
-              className="text-[#FFFFFF] font-bold text-2xl"
+              className="text-[#FFFFFF] font-bold text-xl sm:text-2xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -81,7 +81,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item, i) => (
               <motion.div
                 key={item.name}
@@ -108,10 +108,10 @@ export function Header() {
           </nav>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             {/* Search Button */}
             <motion.button
-              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
+              className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors ml-1 sm:ml-0"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               initial={{ opacity: 0, x: 20 }}
@@ -120,46 +120,46 @@ export function Header() {
               aria-label="Search"
               onClick={() => setIsSearchOpen(true)}
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
 
             {/* Cart Button */}
             <div className="relative">
-            <motion.button
-              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              aria-label="Cart"
+              <motion.button
+                className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors mx-1 sm:mx-4"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                aria-label="Cart"
                 onClick={() => setCartOpen(!cartOpen)}
-            >
-              <ShoppingCart className="w-5 h-5" />
+              >
+                <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#28809a] rounded-full text-xs flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
-            </motion.button>
+              </motion.button>
               
               <CartDropdown />
             </div>
 
             {/* User Button */}
-            <div className="relative">
-            <motion.button
-              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              aria-label="User Account"
+            <div className="relative hidden sm:block">
+              <motion.button
+                className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                aria-label="User Account"
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-            >
-              <User className="w-5 h-5" />
-            </motion.button>
+              >
+                <User className="w-4 h-4 sm:w-5 sm:h-5" />
+              </motion.button>
 
               {/* Profile Dropdown Menu */}
               <AnimatePresence>
@@ -231,7 +231,7 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors md:hidden"
+              className="p-1.5 sm:p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors md:hidden ml-1"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               initial={{ opacity: 0, x: 20 }}
@@ -240,7 +240,7 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
             </motion.button>
           </div>
         </div>
@@ -313,14 +313,14 @@ export function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 bg-[#252525] z-40 pt-20"
+            className="fixed inset-0 bg-[#252525] z-40 pt-16"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="container mx-auto px-4 py-8">
-              <nav className="flex flex-col space-y-6">
+            <div className="container mx-auto px-4 py-6 max-h-[calc(100vh-64px)] overflow-y-auto">
+              <nav className="flex flex-col space-y-5">
                 {navItems.map((item, i) => (
                   <motion.div
                     key={item.name}
@@ -330,12 +330,68 @@ export function Header() {
                   >
                     <Link
                       href={item.href}
-                      className={`text-2xl font-medium ${pathname === item.href ? "text-[#28809a]" : "text-[#EDEDED]"}`}
+                      className={`text-xl font-medium ${pathname === item.href ? "text-[#28809a]" : "text-[#EDEDED]"}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
                   </motion.div>
                 ))}
+                
+                {/* Mobile user options */}
+                <div className="pt-4 mt-2 border-t border-[#8D9192]/20">
+                  <h3 className="text-sm text-[#8D9192] mb-3">Account</h3>
+                  {user ? (
+                    <>
+                      <div className="px-2 py-2 mb-3">
+                        <p className="text-sm font-medium text-[#EDEDED] truncate">{user.name}</p>
+                        <p className="text-xs text-[#8D9192] truncate">{user.email}</p>
+                      </div>
+                      <Link
+                        href="/profile"
+                        className="flex items-center text-[#EDEDED] py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        <span>Profile</span>
+                      </Link>
+                      <Link
+                        href="/orders"
+                        className="flex items-center text-[#EDEDED] py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Package className="w-4 h-4 mr-2" />
+                        <span>Orders</span>
+                      </Link>
+                      <button
+                        className="flex items-center w-full text-left py-2 text-red-400"
+                        onClick={handleLogout}
+                      >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Sign out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/auth/login"
+                        className="flex items-center text-[#EDEDED] py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        <span>Sign in</span>
+                      </Link>
+                      <Link
+                        href="/auth/register"
+                        className="flex items-center text-[#EDEDED] py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        <span>Create account</span>
+                      </Link>
+                    </>
+                  )}
+                </div>
               </nav>
             </div>
           </motion.div>

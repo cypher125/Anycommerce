@@ -101,7 +101,7 @@ export function CartDropdown() {
       <motion.div
         key="cart-dropdown"
         ref={cartRef}
-        className="absolute top-full right-0 mt-2 w-96 max-h-[80vh] overflow-auto bg-[#2A2A2A] rounded-xl shadow-xl border border-[#8D9192]/20 z-50"
+        className="fixed top-[60px] right-0 left-0 sm:absolute sm:top-full sm:left-auto sm:right-0 mt-2 w-full sm:w-96 max-h-[80vh] overflow-auto bg-[#2A2A2A] rounded-xl shadow-xl border border-[#8D9192]/20 z-50 mx-auto sm:mx-0 max-w-[95vw] sm:max-w-none"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
