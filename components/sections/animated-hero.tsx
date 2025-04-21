@@ -86,13 +86,13 @@ export function AnimatedHero() {
             <AnimatedText
               text="Anycommerce combines cutting-edge AI technology with a seamless shopping experience to help you find exactly what you need through natural conversations."
               el="p"
-              className="text-xl text-[#8D9192] mb-8 max-w-3xl mx-auto"
+              className="text-xl text-[#8D9192] mb-12 max-w-3xl mx-auto"
               animation="fade"
               delay={0.4}
             />
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -100,7 +100,7 @@ export function AnimatedHero() {
               <MouseFollow intensity={0.03}>
                 <Link
                   href="/products"
-                  className="px-8 py-4 bg-[#28809a] text-white rounded-md font-medium text-center hover:bg-[#28809a]/90 transition-colors shadow-lg shadow-[#28809a]/20"
+                  className="px-8 py-4 bg-[#28809a] text-white rounded-md font-medium text-center hover:bg-[#28809a]/90 transition-colors shadow-lg shadow-[#28809a]/20 mb-4 sm:mb-0"
                 >
                   Browse Products
                 </Link>
@@ -119,7 +119,7 @@ export function AnimatedHero() {
 
           {/* Hero image with 3D effect */}
           <motion.div
-            className="relative mx-auto max-w-4xl"
+            className="relative mx-auto max-w-4xl mt-12 sm:mt-8"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -132,21 +132,22 @@ export function AnimatedHero() {
                   width={1920}
                   height={1080}
                   className="object-cover"
+                  priority
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#252525] via-transparent to-transparent opacity-70" />
 
                 {/* Floating chat bubble */}
                 <FloatingElement
-                  className="absolute bottom-8 left-8 max-w-xs bg-[#2A2A2A] p-4 rounded-lg shadow-lg"
+                  className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 max-w-[180px] sm:max-w-xs bg-[#2A2A2A] p-3 sm:p-4 rounded-lg shadow-lg"
                   xFactor={10}
                   yFactor={10}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#28809a] flex items-center justify-center shrink-0">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#28809a] flex items-center justify-center shrink-0">
                       <svg
-                        width="16"
-                        height="16"
+                        width="12"
+                        height="12"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -159,14 +160,14 @@ export function AnimatedHero() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-[#EDEDED] text-sm">How can I help you find the perfect product today?</p>
+                      <p className="text-[#EDEDED] text-xs sm:text-sm">How can I help you find the perfect product today?</p>
                     </div>
                   </div>
                 </FloatingElement>
 
                 {/* Floating product card */}
                 <FloatingElement
-                  className="absolute top-8 right-8 w-48 bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg"
+                  className="absolute top-4 sm:top-8 right-4 sm:right-8 w-36 sm:w-48 bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg"
                   xFactor={-15}
                   yFactor={15}
                   delay={0.2}
