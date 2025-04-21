@@ -28,15 +28,19 @@ export function ChatInterface() {
     "Compare products",
   ]
 
-  // Check if mobile on mount
+  // Check if mobile on mount and on resize
   useEffect(() => {
+    // First set based on current window size
+    setIsMobile(window.innerWidth < 768);
+    
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 640);
+      setIsMobile(window.innerWidth < 768);
     };
     
-    checkIfMobile();
+    // Add listener for resize events
     window.addEventListener('resize', checkIfMobile);
     
+    // Clean up
     return () => {
       window.removeEventListener('resize', checkIfMobile);
     };
@@ -99,10 +103,14 @@ export function ChatInterface() {
             className={`fixed z-[999] border border-[#8D9192]/20 ${
               isExpanded
                 ? "top-[10vh] right-[10vw] left-[10vw] bottom-[10vh] w-auto h-auto"
-                : "top-auto bottom-2 right-2 left-2 sm:top-[50%] sm:right-6 sm:left-auto sm:bottom-auto sm:w-full sm:w-96 h-[400px] sm:-translate-y-1/2"
+                : "sm:top-[50%] sm:right-6 sm:left-auto sm:bottom-auto sm:w-96 sm:-translate-y-1/2 top-auto bottom-2 right-2 left-2 w-full h-[400px]"
             } bg-[#252525] rounded-lg shadow-xl flex flex-col overflow-hidden`}
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: isExpanded ? 0 : isMobile ? 0 : "-50%", scale: 1 }}
+            animate={{ 
+              opacity: 1, 
+              y: isExpanded ? 0 : isMobile ? 0 : "-50%", 
+              scale: 1 
+            }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             layout
