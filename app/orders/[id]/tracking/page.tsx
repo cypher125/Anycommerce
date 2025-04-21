@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useAuth } from "@/components/auth-provider"
-import { Header } from "../../../../../components/layout/header"
-import { getOrderById, formatOrderDate, getOrderStatusInfo, getTrackingEvents } from "../../../../../lib/orders"
-import { formatPrice } from "../../../../../lib/utils"
+import { Header } from "@/components/layout/header"
+import { getOrderById, formatOrderDate, getOrderStatusInfo, getTrackingEvents } from "@/lib/orders"
+import { formatPrice } from "@/lib/utils"
 import { motion } from "framer-motion"
-import { ScrollProgress } from "../../../../../components/ui/scroll-progress"
+import { ScrollProgress } from "@/components/ui/scroll-progress"
 import { ArrowLeft, PackageCheck, MapPin, Map, Package } from "lucide-react"
-import { Button } from "../../../../../components/ui/button"
-import { AnimatedText } from "../../../../../components/transitions/animated-text"
+import { Button } from "@/components/ui/button"
+import { AnimatedText } from "@/components/transitions/animated-text"
 import { useRouter } from "next/navigation"
-import type { Order, OrderWithTracking, TrackingEvent } from "../../../../../types/order"
+import type { Order, OrderWithTracking, TrackingEvent } from "@/types/order"
 
 interface OrderTrackingPageProps {
   params: {
