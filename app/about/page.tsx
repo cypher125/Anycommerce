@@ -13,29 +13,29 @@ import Image from "next/image"
 export default function About() {
   const developers = [
     {
-      name: "Alex Chen",
+      name: "Osawaye Cyrus",
       role: "Frontend Developer",
       image: "/placeholder.svg?height=400&width=400",
-      bio: "Alex is a passionate frontend developer with expertise in React, Next.js, and animation libraries like Framer Motion. With 5+ years of experience building interactive user interfaces, Alex focuses on creating engaging and accessible web experiences.",
-      skills: ["React", "Next.js", "TypeScript", "Framer Motion", "Tailwind CSS", "UI/UX Design"],
+      bio: "Osawaye is a full stack developer with 4 years of experience. With expertise in UI/UX design, Next.js, and TailwindCSS, he combines technical skills with an eye for user experience. His knowledge in AI, Django, and machine learning allows him to create sophisticated yet accessible web applications.",
+      skills: ["UI/UX", "Next.js", "TailwindCSS", "AI", "Django", "Python", "Machine Learning", "Web Automation", "Pentesting", "Software Engineering"],
       social: {
-        github: "https://github.com/alexchen",
-        linkedin: "https://linkedin.com/in/alexchen",
-        email: "alex@anycommerce.com",
-        website: "https://alexchen.dev",
+        github: "https://github.com/osawaecyrus",
+        linkedin: "https://linkedin.com/in/osawaecyrus",
+        email: "osawaye@anycommerce.com",
+        website: "https://osawaecyrus.dev",
       },
     },
     {
-      name: "Jordan Taylor",
+      name: "Pelumi Faith",
       role: "Backend Developer",
       image: "/placeholder.svg?height=400&width=400",
-      bio: "Jordan is a skilled backend developer specializing in AI integration, database architecture, and API development. With a background in machine learning and natural language processing, Jordan brings powerful AI capabilities to the Anycommerce platform.",
-      skills: ["Node.js", "Python", "AI/ML", "Database Design", "API Development", "Cloud Architecture"],
+      bio: "Pelumi is a full stack developer with 4 years of experience specializing in backend technologies. With strong skills in .NET, C#, and Python, she brings robust engineering capabilities to the Anycommerce platform. Her expertise in machine learning adds intelligence to our software architecture.",
+      skills: [".NET", "C#", "Python", "Machine Learning", "Software Engineering", "Database Design", "API Development"],
       social: {
-        github: "https://github.com/jordantaylor",
-        linkedin: "https://linkedin.com/in/jordantaylor",
-        email: "jordan@anycommerce.com",
-        website: "https://jordantaylor.dev",
+        github: "https://github.com/pelumifaith",
+        linkedin: "https://linkedin.com/in/pelumifaith",
+        email: "pelumi@anycommerce.com",
+        website: "https://pelumifaith.dev",
       },
     },
   ]
