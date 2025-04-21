@@ -164,7 +164,7 @@ export default function ProductDetail() {
               )}
 
                   <div className="flex gap-4 mt-8">
-                    <motion.button
+                  <motion.button
                       className="flex-1 px-6 py-3 bg-[#28809a] text-white rounded-md font-medium flex items-center justify-center"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -173,12 +173,12 @@ export default function ProductDetail() {
                     >
                       <ShoppingCart className="w-5 h-5 mr-2" />
                       Add to Cart
-                    </motion.button>
-                    <motion.button
+                  </motion.button>
+                  <motion.button
                       className="px-6 py-3 border border-[#8D9192]/30 text-[#EDEDED] rounded-md hover:bg-[#8D9192]/10 transition-colors"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                       <Heart className="w-5 h-5 mr-2" />
                       Wishlist
                     </motion.button>

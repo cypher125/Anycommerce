@@ -113,41 +113,41 @@ export function Header() {
 
             {/* Cart Button */}
             <div className="relative">
-              <motion.button
-                className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                aria-label="Cart"
+            <motion.button
+              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              aria-label="Cart"
                 onClick={() => setCartOpen(!cartOpen)}
-              >
-                <ShoppingCart className="w-5 h-5" />
+            >
+              <ShoppingCart className="w-5 h-5" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#28809a] rounded-full text-xs flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
-              </motion.button>
+            </motion.button>
               
               <CartDropdown />
             </div>
 
             {/* User Button */}
             <div className="relative">
-              <motion.button
-                className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                aria-label="User Account"
+            <motion.button
+              className="p-2 text-[#EDEDED] hover:text-[#FFFFFF] transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              aria-label="User Account"
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              >
-                <User className="w-5 h-5" />
-              </motion.button>
+            >
+              <User className="w-5 h-5" />
+            </motion.button>
 
               {/* Profile Dropdown Menu */}
               <AnimatePresence>

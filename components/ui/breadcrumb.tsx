@@ -10,7 +10,7 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
    * The visual separator between breadcrumb items 
    * @default <ChevronRight className="h-4 w-4 text-[#8D9192]" />
    */
-  separator?: React.ReactNode
+    separator?: React.ReactNode
   /** The breadcrumb items */
   children: React.ReactNode
 }
@@ -56,14 +56,14 @@ export function BreadcrumbItem({
   ...props
 }: BreadcrumbItemProps) {
   return (
-    <li
+  <li
       className={cn("flex items-center text-sm", className)}
       aria-current={isCurrentPage ? "page" : undefined}
-      {...props}
-    >
+    {...props}
+  >
       {children}
-    </li>
-  )
+  </li>
+)
 }
 
 export interface BreadcrumbLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
@@ -94,11 +94,11 @@ export function BreadcrumbLink({
           : "text-[#28809a] cursor-default",
         className
       )}
-      {...props}
-    >
+    {...props}
+  >
       {children}
     </Component>
-  )
+)
 }
 
 export interface BreadcrumbPageProps extends React.HTMLAttributes<HTMLSpanElement> {}

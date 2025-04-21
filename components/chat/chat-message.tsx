@@ -15,7 +15,7 @@ export interface ChatMessageProps {
 
 export function ChatMessage({ message, isLast }: ChatMessageProps) {
   const isUser = message.role === "user"
-  
+
   // Handle different message types
   const renderMessageContent = () => {
     // Check if message contains product data
@@ -53,26 +53,26 @@ export function ChatMessage({ message, isLast }: ChatMessageProps) {
     }
     
     // Default text message
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className={cn("flex w-full mb-4", isUser ? "justify-end" : "justify-start")}
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className={cn("flex w-full mb-4", isUser ? "justify-end" : "justify-start")}
+    >
+      <div
+        className={cn(
+          "max-w-[80%] rounded-2xl px-4 py-3",
+          isUser ? "bg-[#28809a] text-white rounded-tr-none" : "bg-[#2A2A2A] text-[#EDEDED] rounded-tl-none",
+        )}
       >
-        <div
-          className={cn(
-            "max-w-[80%] rounded-2xl px-4 py-3",
-            isUser ? "bg-[#28809a] text-white rounded-tr-none" : "bg-[#2A2A2A] text-[#EDEDED] rounded-tl-none",
-          )}
-        >
           <p className="text-sm whitespace-pre-line">{message.content}</p>
-          <div className="mt-1 text-xs opacity-70">
-            {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-          </div>
+        <div className="mt-1 text-xs opacity-70">
+          {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </div>
-      </motion.div>
-    )
+      </div>
+    </motion.div>
+  )
   }
 
   return renderMessageContent()
