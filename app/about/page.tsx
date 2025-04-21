@@ -84,7 +84,7 @@ export default function About() {
             >
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">Our Mission</h2>
               <p className="text-[#EDEDED] mb-6">
-                AnyCommerce is an AI-powered multi-modal e-commerce platform designed to transform online shopping through text, voice, and image interactions. Powered by our intelligent shopping assistant Cortana, we make shopping more intuitive, personalized, and enjoyable through advanced AI understanding and interaction.
+                AnyCommerce is an AI-powered multi-modal e-commerce platform designed to transform online shopping through text, voice, and image interactions. Powered by our intelligent shopping assistant Cartana, we make shopping more intuitive, personalized, and enjoyable through advanced AI understanding and interaction.
               </p>
 
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">The Problem We're Solving</h2>
@@ -94,15 +94,15 @@ export default function About() {
 
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">Our Solution</h2>
               <p className="text-[#EDEDED] mb-6">
-                AnyCommerce addresses these challenges through Cortana, our innovative AI shopping assistant that provides:
+                AnyCommerce addresses these challenges through Cartana, our innovative AI shopping assistant that provides:
               </p>
 
               <ul className="list-disc pl-6 mb-6 text-[#EDEDED] space-y-2">
                 <li>
-                  <span className="font-medium text-[#28809a]">Multi-Modal Shopping:</span> Interact with Cortana through text, voice, or image uploads to find exactly what you need.
+                  <span className="font-medium text-[#28809a]">Multi-Modal Shopping:</span> Interact with Cartana through text, voice, or image uploads to find exactly what you need.
                 </li>
                 <li>
-                  <span className="font-medium text-[#28809a]">Natural Language Understanding:</span> Simply describe what you're looking for in everyday language—Cortana understands intent and context.
+                  <span className="font-medium text-[#28809a]">Natural Language Understanding:</span> Simply describe what you're looking for in everyday language—Cartana understands intent and context.
                 </li>
                 <li>
                   <span className="font-medium text-[#28809a]">Personalized Recommendations:</span> Receive tailored product suggestions based on your preferences, history, and conversational context.
@@ -143,7 +143,7 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Cortana Capabilities Section */}
+            {/* Cartana Capabilities Section */}
             <motion.div
               className="mb-20 bg-[#2A2A2A] rounded-xl p-8 border border-[#8D9192]/10"
               initial={{ opacity: 0, y: 30 }}
@@ -154,11 +154,11 @@ export default function About() {
                 <span className="inline-flex mr-3 w-8 h-8 rounded-full bg-[#28809a]/20 items-center justify-center">
                   <span className="w-4 h-4 rounded-full bg-[#28809a] animate-pulse"></span>
                 </span>
-                What Cortana Can Do For You
+                What Cartana Can Do For You
               </h2>
               
               <p className="text-[#EDEDED] mb-6">
-                Our AI shopping assistant Cortana is designed to make your shopping experience effortless and enjoyable. Here's how Cortana can help you:
+                Our AI shopping assistant Cartana is designed to make your shopping experience effortless and enjoyable. Here's how Cartana can help you:
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -249,7 +249,7 @@ export default function About() {
               
               <div className="bg-[#28809a]/10 rounded-lg p-4 border border-[#28809a]/20">
                 <p className="text-[#EDEDED] text-center italic">
-                  Simply type, speak, or upload an image—Cortana understands and takes action immediately.
+                  Simply type, speak, or upload an image—Cartana understands and takes action immediately.
                 </p>
               </div>
             </motion.div>
