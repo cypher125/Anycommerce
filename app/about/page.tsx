@@ -84,49 +84,62 @@ export default function About() {
             >
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">Our Mission</h2>
               <p className="text-[#EDEDED] mb-6">
-                Anycommerce is an AI-powered e-commerce platform designed to transform the online shopping experience.
-                By combining cutting-edge artificial intelligence with a user-friendly interface, we're making shopping
-                more intuitive, personalized, and enjoyable.
+                AnyCommerce is an AI-powered multi-modal e-commerce platform designed to transform online shopping through text, voice, and image interactions. Powered by our intelligent shopping assistant Cortana, we make shopping more intuitive, personalized, and enjoyable through advanced AI understanding and interaction.
               </p>
 
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">The Problem We're Solving</h2>
               <p className="text-[#EDEDED] mb-6">
-                Traditional e-commerce platforms often overwhelm shoppers with too many options and limited guidance.
-                Finding the right product can be time-consuming and frustrating, leading to abandoned carts and
-                unsatisfied customers. Additionally, most platforms lack personalized assistance that understands
-                individual preferences and needs.
+                Traditional e-commerce platforms often overwhelm shoppers with too many options, limited search capabilities, and minimal guidance. Finding the right product becomes time-consuming and frustrating when relying solely on text search and manual filtering, leading to abandoned carts and unsatisfied customers.
               </p>
 
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">Our Solution</h2>
               <p className="text-[#EDEDED] mb-6">
-                Anycommerce addresses these challenges through our innovative AI shopping assistant that provides:
+                AnyCommerce addresses these challenges through Cortana, our innovative AI shopping assistant that provides:
               </p>
 
               <ul className="list-disc pl-6 mb-6 text-[#EDEDED] space-y-2">
                 <li>
-                  <span className="font-medium text-[#28809a]">Conversational Shopping:</span> Interact naturally with
-                  our AI to find products that match your specific needs and preferences.
+                  <span className="font-medium text-[#28809a]">Multi-Modal Shopping:</span> Interact with Cortana through text, voice, or image uploads to find exactly what you need.
                 </li>
                 <li>
-                  <span className="font-medium text-[#28809a]">Personalized Recommendations:</span> Receive tailored
-                  product suggestions based on your browsing history, preferences, and conversation context.
+                  <span className="font-medium text-[#28809a]">Natural Language Understanding:</span> Simply describe what you're looking for in everyday language—Cortana understands intent and context.
                 </li>
                 <li>
-                  <span className="font-medium text-[#28809a]">Simplified Decision-Making:</span> Get detailed product
-                  comparisons and honest advice to help you make informed purchasing decisions.
+                  <span className="font-medium text-[#28809a]">Personalized Recommendations:</span> Receive tailored product suggestions based on your preferences, history, and conversational context.
                 </li>
                 <li>
-                  <span className="font-medium text-[#28809a]">24/7 Assistance:</span> Shop with confidence knowing
-                  expert help is always available, day or night.
+                  <span className="font-medium text-[#28809a]">Seamless Order Management:</span> Check orders, track deliveries, and reorder favorite products through simple conversations.
+                </li>
+                <li>
+                  <span className="font-medium text-[#28809a]">24/7 Intelligent Assistance:</span> Shop with confidence knowing expert AI help is always available to guide your decisions.
                 </li>
               </ul>
 
               <h2 className="text-2xl font-bold text-[#FFFFFF] mb-4">Our Technology</h2>
+              <p className="text-[#EDEDED] mb-6">
+                AnyCommerce leverages state-of-the-art technologies to create a seamless shopping experience:
+              </p>
+              
+              <ul className="list-disc pl-6 mb-6 text-[#EDEDED] space-y-2">
+                <li>
+                  <span className="font-medium text-[#28809a]">Frontend:</span> Next.js, TypeScript, and TailwindCSS for a responsive and accessible user interface.
+                </li>
+                <li>
+                  <span className="font-medium text-[#28809a]">Backend:</span> .NET Web API providing robust service architecture.
+                </li>
+                <li>
+                  <span className="font-medium text-[#28809a]">Database:</span> PostgreSQL with pgvector extension for AI-driven search and matching.
+                </li>
+                <li>
+                  <span className="font-medium text-[#28809a]">AI Model:</span> Powered by GPT-4o via OpenAI API for natural language understanding and reasoning.
+                </li>
+                <li>
+                  <span className="font-medium text-[#28809a]">Hybrid Chat Interface:</span> A conversational UI that combines form actions with assistant interaction.
+                </li>
+              </ul>
+              
               <p className="text-[#EDEDED]">
-                Anycommerce leverages state-of-the-art natural language processing, machine learning, and a responsive
-                frontend to create a seamless shopping experience. Our platform continuously learns from interactions to
-                improve recommendations and better understand customer needs, making each shopping experience better
-                than the last.
+                Our platform continuously learns from interactions to improve recommendations and better understand customer needs, making each shopping experience better than the last. With vector search capabilities in our database, we can match products semantically to natural language descriptions, finding exactly what you're looking for even when you don't know the exact terms.
               </p>
             </motion.div>
 
