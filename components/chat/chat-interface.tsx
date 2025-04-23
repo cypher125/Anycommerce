@@ -11,31 +11,42 @@ import { SuggestionChips } from "./suggestion-chips"
 import { Send, Mic, RefreshCw, Maximize2, Minimize2, Image as ImageIcon } from "lucide-react"
 
 export function ChatInterface() {
-  const { isOpen, messages, isTyping, toggleChat, sendMessage, clearMessages } = useChat()
+  const { 
+    isOpen, 
+    messages, 
+    isTyping, 
+    sendMessage, 
+    clearMessages, 
+    uploadImage,
+    lastUploadedImage 
+  } = useChat()
   const [inputValue, setInputValue] = useState("")
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  
   const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Suggestions for quick replies
   const suggestions = [
-    "What's new in store?",
-    "Show me bestsellers",
-    "I need help finding a gift",
-    "What's on sale?",
-    "Compare products",
+    "Show me popular products",
+    "What are your best sellers?",
+    "I'm looking for a new laptop",
+    "Help me find a gift for my friend",
+    "Compare these two products",
   ]
 
-  // Check if mobile on mount and on resize
+  // Check if viewport is mobile-sized
   useEffect(() => {
-    // First set based on current window size
-    setIsMobile(window.innerWidth < 768);
-    
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 640); // 640px is the sm breakpoint in Tailwind
     };
+    
+    // Initial check
+    checkIfMobile();
     
     // Add listener for resize events
     window.addEventListener('resize', checkIfMobile);
@@ -78,15 +89,48 @@ export function ChatInterface() {
     setIsExpanded(!isExpanded)
   }
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     
-    // In a real implementation, you would upload the image to your server
-    // and then process it with your AI model for visual search
-    
-    // For now, we'll just simulate a product search based on image upload
-    sendMessage("Find products similar to the image I uploaded")
+    try {
+      setIsUploading(true);
+      // Simulating upload progress
+      const interval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(interval);
+            return 90;
+          }
+          return prev + 10;
+        });
+      }, 100);
+      
+      // Use the uploadImage function from ChatContext
+      await uploadImage(file);
+      
+      // Complete the progress bar
+      setUploadProgress(100);
+      setTimeout(() => {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }, 500);
+      
+      // Set suggested message and focus input
+      const suggestedMessage = "Find products similar to this image";
+      setInputValue(suggestedMessage);
+      inputRef.current?.focus();
+      
+      // Automatically send the message after a short delay
+      setTimeout(() => {
+        sendMessage(suggestedMessage);
+        setInputValue("");
+      }, 800);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
     
     // Clear the file input
     if (fileInputRef.current) {
@@ -134,8 +178,8 @@ export function ChatInterface() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-[#FFFFFF] font-medium">Shopping Assistant</h3>
-                  <p className="text-[#8D9192] text-xs">AI-powered help</p>
+                  <h3 className="text-[#FFFFFF] font-medium">Cartana</h3>
+                  <p className="text-[#8D9192] text-xs">AI Shopping Assistant</p>
                 </div>
               </div>
               <div className="flex items-center">
@@ -177,6 +221,27 @@ export function ChatInterface() {
 
             {/* Input Area */}
             <form onSubmit={handleSubmit} className="p-4 border-t border-[#8D9192]/20 bg-[#2A2A2A]">
+              {/* Upload Progress Bar */}
+              {isUploading && (
+                <div className="h-1 w-full bg-[#1e2021] mb-2 rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-[#28809a]" 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${uploadProgress}%` }}
+                  />
+                </div>
+              )}
+              
+              {/* Last uploaded image preview */}
+              {lastUploadedImage && !isUploading && (
+                <div className="mb-2 flex items-center text-xs text-[#8D9192]">
+                  <div className="w-5 h-5 mr-1 rounded overflow-hidden flex-shrink-0">
+                    <img src={lastUploadedImage} alt="Uploaded" className="w-full h-full object-cover" />
+                  </div>
+                  <span>Image uploaded. Ask Cartana about this image.</span>
+                </div>
+              )}
+              
               <div className="flex items-center rounded-full bg-[#252525] border border-[#8D9192]/20 px-4 py-2">
                 <input
                   type="text"
@@ -191,9 +256,10 @@ export function ChatInterface() {
                     type="button"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="text-[#8D9192] hover:text-[#28809a] transition-colors"
+                    className={`${isUploading ? 'text-[#28809a]' : 'text-[#8D9192] hover:text-[#28809a]'} transition-colors`}
                     aria-label="Upload image"
                     onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading}
                   >
                     <ImageIcon size={18} />
                   </motion.button>
@@ -210,7 +276,7 @@ export function ChatInterface() {
                     type="submit"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    disabled={!inputValue.trim()}
+                    disabled={!inputValue.trim() || isUploading}
                     className="text-[#28809a] disabled:text-[#8D9192]/50 transition-colors"
                     aria-label="Send message"
                   >

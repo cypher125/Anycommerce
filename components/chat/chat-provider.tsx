@@ -14,6 +14,8 @@ export interface MessageData {
   priceRanges?: Array<{ min: number; max: number; count: number }>
   selectedFilters?: string[]
   onBack?: () => void
+  tools_used?: string[]
+  image_url?: string
 }
 
 export type Message = {
@@ -28,18 +30,22 @@ type ChatContextType = {
   isOpen: boolean
   messages: Message[]
   isTyping: boolean
+  lastUploadedImage: string | null;
   toggleChat: () => void
   sendMessage: (content: string) => void
   clearMessages: () => void
+  uploadImage: (file: File) => Promise<string>
 }
 
 export const ChatContext = createContext<ChatContextType>({
   isOpen: false,
   messages: [],
   isTyping: false,
+  lastUploadedImage: null,
   toggleChat: () => {},
   sendMessage: () => {},
   clearMessages: () => {},
+  uploadImage: async () => "",
 })
 
 export function ChatProvider({ children }: { children: ReactNode }) {
@@ -47,6 +53,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     isOpen: false,
     messages: [] as Message[],
     isTyping: false,
+    sessionId: "",
+    lastUploadedImage: null as string | null,
   })
 
   // Initialize with welcome message
@@ -66,12 +74,56 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     }
   }, [state.messages.length])
 
+  // Initialize session ID from localStorage or create a new one
+  useEffect(() => {
+    const storedSessionId = localStorage.getItem('cartana_session_id');
+    if (storedSessionId) {
+      setState(prev => ({ ...prev, sessionId: storedSessionId }));
+    }
+  }, []);
+
   const toggleChat = useCallback(() => {
     setState((prev) => ({
       ...prev,
       isOpen: !prev.isOpen,
     }))
   }, [])
+
+  // Function to upload image to backend
+  const uploadImage = useCallback(async (file: File): Promise<string> => {
+    try {
+      setState(prev => ({ ...prev, isTyping: true }));
+
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      if (state.sessionId) {
+        formData.append('session_id', state.sessionId);
+      }
+
+      // In a real implementation, this would hit your actual API endpoint
+      // const response = await fetch('/api/cartana/upload-image/', {
+      //   method: 'POST',
+      //   body: formData,
+      // });
+
+      // Simulate response in demo mode
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const imageUrl = URL.createObjectURL(file);
+      
+      setState(prev => ({ 
+        ...prev, 
+        lastUploadedImage: imageUrl,
+        isTyping: false 
+      }));
+
+      return imageUrl;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setState(prev => ({ ...prev, isTyping: false }));
+      throw error;
+    }
+  }, [state.sessionId]);
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim()) return
@@ -82,6 +134,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       content,
       role: "user",
       timestamp: new Date(),
+      // Add image reference to user message if it's related to an image and we have lastUploadedImage
+      data: state.lastUploadedImage && 
+            (content.toLowerCase().includes("image") || 
+             content.toLowerCase().includes("similar") || 
+             content.toLowerCase().includes("this")) ? 
+        { image_url: state.lastUploadedImage } : undefined
     }
 
     setState((prev) => ({
@@ -90,15 +148,52 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       isTyping: true,
     }))
 
-    // Simulate AI response (in a real app, this would call your AI service)
-    setTimeout(() => {
+    try {
+      // In a real implementation, this would call your Cartana API
+      // const response = await fetch('/api/cartana/message/', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ 
+      //     message: content,
+      //     session_id: state.sessionId 
+      //   }),
+      // });
+      // const data = await response.json();
+      // const { response: responseText, session_id, tools_used } = data;
+
+      // For demo, simulate AI response with a timeout and pattern matching
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       let aiMessage: Message;
       
       // Parse intent from user message - this would normally be done by the AI
       const lowercaseContent = content.toLowerCase();
       
+      // Handle image-related messages if we have a last uploaded image
+      if (state.lastUploadedImage && 
+          (lowercaseContent.includes("this image") || 
+           lowercaseContent.includes("the image") || 
+           lowercaseContent.includes("my image") ||
+           lowercaseContent.includes("image") ||
+           lowercaseContent.includes("uploaded image") ||
+           lowercaseContent.includes("similar"))) {
+        
+        aiMessage = {
+          id: `assistant-${Date.now()}`,
+          content: `I analyzed your uploaded image and found these similar products:`,
+          role: "assistant",
+          timestamp: new Date(),
+          data: {
+            type: "products",
+            products: sampleProducts.slice(0, 4),
+            layout: "carousel",
+            image_url: state.lastUploadedImage,
+            tools_used: ["image_product_search"]
+          }
+        };
+      }
       // Show products for product search queries
-      if (lowercaseContent.includes("show") || lowercaseContent.includes("find") || lowercaseContent.includes("search") || lowercaseContent.includes("looking for")) {
+      else if (lowercaseContent.includes("show") || lowercaseContent.includes("find") || lowercaseContent.includes("search") || lowercaseContent.includes("looking for")) {
         // Filter by category if mentioned
         const categoryTerms = ["electronics", "clothing", "beauty", "home", "kitchen"];
         const foundCategory = categoryTerms.find(term => lowercaseContent.includes(term));
@@ -120,7 +215,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
             data: {
               type: "products",
               products: filteredProducts.slice(0, 4),
-              layout: "carousel"
+              layout: "carousel",
+              tools_used: ["search_products"]
             }
           };
         } else {
@@ -142,7 +238,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           data: {
             type: "products",
             products: sampleProducts.slice(0, 2),
-            layout: "comparison"
+            layout: "comparison",
+            tools_used: ["compare_products"]
           }
         };
       }
@@ -155,7 +252,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           timestamp: new Date(),
           data: {
             type: "product-detail",
-            product: sampleProducts[0]
+            product: sampleProducts[0],
+            tools_used: ["get_product_details"]
           }
         };
       }
@@ -180,7 +278,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
               { min: 0, max: 100, count: 2 },
               { min: 100, max: 200, count: 3 },
               { min: 200, max: Infinity, count: 1 }
-            ]
+            ],
+            tools_used: ["search_products"]
           }
         };
       }
@@ -192,6 +291,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           "I can show you our latest arrivals if you're interested.",
           "Is there a specific category you're interested in?",
           "I can help you compare different products if you'd like.",
+          "You can also upload an image, and I'll find similar products for you!"
         ]
 
         aiMessage = {
@@ -206,9 +306,26 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         ...prev,
         messages: [...prev.messages, aiMessage],
         isTyping: false,
-      }))
-    }, 1500)
-  }, [])
+      }));
+      
+    } catch (error) {
+      console.error("Error sending message:", error);
+      
+      // Add an error message
+      const errorMessage: Message = {
+        id: `error-${Date.now()}`,
+        content: "Sorry, I encountered an error processing your request. Please try again.",
+        role: "assistant", 
+        timestamp: new Date(),
+      };
+      
+      setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, errorMessage],
+        isTyping: false,
+      }));
+    }
+  }, [state.lastUploadedImage, state.sessionId])
 
   const clearMessages = useCallback(() => {
     setState((prev) => ({
@@ -221,6 +338,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           timestamp: new Date(),
         },
       ],
+      lastUploadedImage: null,
     }))
   }, [])
 
@@ -230,9 +348,11 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         isOpen: state.isOpen,
         messages: state.messages,
         isTyping: state.isTyping,
+        lastUploadedImage: state.lastUploadedImage,
         toggleChat,
         sendMessage,
         clearMessages,
+        uploadImage,
       }}
     >
       {children}
